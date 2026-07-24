@@ -1,1 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NovaPay | Login</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1 class="logo">Nova<span>Pay</span></h1>
+
+    <p class="subtitle">
+        Smart Investment Platform
+    </p>
+
+    <div class="card">
+
+        <h2 class="title">
+            Welcome Back
+        </h2>
+
+        <p class="desc">
+            Login to continue
+        </p>
+
+        <div class="input-group">
+
+            <label>Email</label>
+
+            <input
+            id="email"
+            class="input"
+            type="email"
+            placeholder="Enter your email">
+
+        </div>
+
+        <div class="input-group">
+
+            <label>Password</label>
+
+            <input
+            id="password"
+            class="input"
+            type="password"
+            placeholder="Enter your password">
+
+        </div>
+
+        <button
+        class="btn"
+        onclick="login()">
+
+        Login
+
+        </button>
+
+        <div class="small">
+
+            Don't have an account?
+
+            <a href="register.html">
+
+                Register
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
