@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Withdraw</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h2 class="title">Withdraw</h2>
+
+<div class="card">
+
+<label>Wallet Address</label>
+
+<input
+id="wallet"
+class="input"
+type="text"
+placeholder="USDT Wallet">
+
+<div class="mt20"></div>
+
+<label>Amount</label>
+
+<input
+id="withdrawAmount"
+class="input"
+type="number"
+placeholder="Amount">
+
+<div class="mt20"></div>
+
+<button
+class="btn"
+onclick="withdrawMoney()">
+
+Submit Withdraw
+
+</button>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
