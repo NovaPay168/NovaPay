@@ -1,30 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>NovaPay Dashboard</title>
 
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
-
 <div class="container">
 
-<h2 id="userName">Loading...</h2>
+<div class="balance-card">
 
-<h1 id="balance">$0.00</h1>
+<p class="balance-title">
+Total Balance
+</p>
 
-<button onclick="logout()">
-Logout
-</button>
+<h1 id="balance" class="balance-money">
+$0.00
+</h1>
+
+<p id="userName">
+Loading...
+</p>
+
+</div>
+
+<div class="menu-grid">
+
+<div class="menu-item">
+<div class="menu-item"
+onclick="location.href='deposit.html'">
+
+<span>Deposit</span>
+
+</div>
+
+<div class="menu-item">
+<div class="menu-item"
+onclick="location.href='withdraw.html'">
+
+<span>Withdraw</span>
+
+</div>
+
+<div class="menu-item">
+<div class="menu-item" onclick="location.href='plans.html'">
+    <span>Investment</span>
+</div>
+
+<div class="menu-item">
+<span>Team</span>
+</div>
+
+<div class="menu-item">
+<span>Profile</span>
+</div>
+
+<div class="menu-item">
+<span>History</span>
+</div>
+
+<div class="menu-item">
+<span>Support</span>
+</div>
+
+<div class="menu-item" onclick="logout()">
+<span>Logout</span>
+</div>
+
+</div>
+
+</div>
+<div class="container">
+
+    <div class="card">
+
+        <h2 id="userName">
+            Loading...
+        </h2>
+
+        <p>
+            Welcome back 👋
+        </p>
+
+        <h1 id="balance">
+            $0.00
+        </h1>
+
+    </div>
+
+    <div class="card mt20">
+
+        <button class="btn"
+        onclick="location.href='deposit.html'">
+
+        Deposit
+
+        </button>
+
+        <div class="mt10"></div>
+
+        <button class="btn"
+        onclick="location.href='withdraw.html'">
+
+        Withdraw
+
+        </button>
+
+        <div class="mt10"></div>
+
+        <button class="btn"
+        onclick="logout()">
+
+        Logout
+
+        </button>
+
+    </div>
 
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="script.js"></script>
 
+<script src="script.js"></script>
+<div class="bottom-nav">
+
+<a href="dashboard.html" class="active">
+Home
+</a>
+
+<a href="plans.html">
+Plans
+</a>
+
+<a href="team.html">
+Team
+</a>
+
+<a href="profile.html">
+Profile
+</a>
+
+</div>
+  
 </body>
+
 </html>
