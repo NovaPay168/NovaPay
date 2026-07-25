@@ -1,14 +1,20 @@
-const SUPABASE_URL = "https://bqlswfkhreryhgnlzwic.supabase.co";
+// ================================
+// NovaPay
+// Supabase Config
+// ================================
 
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndrbmF3b3dudGJmaHdoZ2V1b3ViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ4MTk5MTYsImV4cCI6MjEwMDM5NTkxNn0.CwarFveJlZtnZ2Iu0VLD3A8OM0QMQP3_6tWRZ9BcCpg";
+const SUPABASE_URL = "https://eolbdusxixkkfrgainlc.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_PxTBl0SHkEUtSp8tFz9Icw_cGmuYfEb";
 
 const supabase = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
+    SUPABASE_URL,
+    SUPABASE_KEY
 );
-// ===============================
+
+// ================================
 // Register
-// ===============================
+// ================================
 
 async function register() {
 
@@ -19,12 +25,12 @@ async function register() {
     const referral = document.getElementById("referral").value.trim();
 
     if (!fullname || !email || !password || !confirmPassword) {
-        alert("Please fill in all required fields.");
+        alert("Please fill all fields");
         return;
     }
 
     if (password !== confirmPassword) {
-        alert("Passwords do not match.");
+        alert("Passwords do not match");
         return;
     }
 
@@ -38,21 +44,44 @@ async function register() {
         return;
     }
 
-    alert("Registration successful! Please login.");
+    const user = data.user;
+
+    if (user) {
+
+        await supabase
+            .from("profiles")
+            .insert({
+                id: user.id,
+                full_name: fullname,
+                email: email,
+                balance: 1,
+                total_profit: 0,
+                referral_code: Math.random().toString(36).substring(2,8).toUpperCase(),
+                referred_by: referral || null
+            });
+
+    }
+
+    alert("Register Success");
 
     window.location.href = "login.html";
-}
 
-// ===============================
+}
+// ================================
 // Login
-// ===============================
+// ================================
 
 async function login() {
 
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
 
-    const { data, error } = await supabase.auth.signInWithPassword({
+    if (!email || !password) {
+        alert("Please enter email and password");
+        return;
+    }
+
+    const { error } = await supabase.auth.signInWithPassword({
         email,
         password
     });
@@ -63,4 +92,76 @@ async function login() {
     }
 
     window.location.href = "dashboard.html";
-           }
+}
+
+// ================================
+// Logout
+// ================================
+
+async function logout() {
+
+    await supabase.auth.signOut();
+
+    window.location.href = "login.html";
+}
+
+// ================================
+// Check Session
+// ================================
+
+async function checkSession() {
+
+    const { data } = await supabase.auth.getSession();
+
+    if (!data.session) {
+
+        if (window.location.pathname.includes("dashboard.html")) {
+            window.location.href = "login.html";
+        }
+
+    }
+
+}
+
+checkSession();
+// ================================
+// Load Profile
+// ================================
+
+async function loadProfile() {
+
+    const { data: sessionData } = await supabase.auth.getSession();
+
+    if (!sessionData.session) return;
+
+    const user = sessionData.session.user;
+
+    const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
+        .single();
+
+    if (error) {
+        console.log(error.message);
+        return;
+    }
+
+    // Display Name
+    const name = document.getElementById("userName");
+    if (name) {
+        name.innerText = data.full_name;
+    }
+
+    // Display Balance
+    const balance = document.getElementById("balance");
+    if (balance) {
+        balance.innerText = "$" + Number(data.balance).toFixed(2);
+    }
+
+}
+
+// Run on Dashboard
+if (window.location.pathname.includes("dashboard.html")) {
+    loadProfile();
+}
