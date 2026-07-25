@@ -165,3 +165,81 @@ async function loadProfile() {
 if (window.location.pathname.includes("dashboard.html")) {
     loadProfile();
 }
+// =========================
+// Deposit
+// =========================
+
+async function deposit() {
+
+    const amount = Number(
+        document.getElementById("depositAmount").value
+    );
+
+    if (amount <= 0) {
+        alert("Please enter a valid amount.");
+        return;
+    }
+
+    const { data: sessionData } = await supabase.auth.getSession();
+
+    if (!sessionData.session) {
+        alert("Please login first.");
+        return;
+    }
+
+    const user = sessionData.session.user;
+
+    const { error } = await supabase
+        .from("deposits")
+        .insert({
+            user_id: user.id,
+            amount: amount,
+            status: "pending"
+        });
+
+    if (error) {
+        alert(error.message);
+        return;
+    }
+
+    alert("Deposit request submitted successfully!");
+}
+// =========================
+// Withdraw
+// =========================
+
+async function withdrawMoney() {
+
+    const wallet = document.getElementById("wallet").value.trim();
+    const amount = Number(document.getElementById("withdrawAmount").value);
+
+    if (!wallet || amount <= 0) {
+        alert("Please enter wallet and amount.");
+        return;
+    }
+
+    const { data: sessionData } = await supabase.auth.getSession();
+
+    if (!sessionData.session) {
+        alert("Please login first.");
+        return;
+    }
+
+    const user = sessionData.session.user;
+
+    const { error } = await supabase
+        .from("withdraws")
+        .insert({
+            user_id: user.id,
+            wallet: wallet,
+            amount: amount,
+            status: "pending"
+        });
+
+    if (error) {
+        alert(error.message);
+        return;
+    }
+
+    alert("Withdraw request submitted successfully!");
+}
