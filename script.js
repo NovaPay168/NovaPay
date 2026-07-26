@@ -1,4 +1,4 @@
-alert("script loaded");
+
 // ================================
 // NovaPay
 // Supabase Config
@@ -18,6 +18,10 @@ const supabase = window.supabase.createClient(
 // ================================
 
 async function register() {
+
+    alert("Register button clicked");
+
+    const fullname = document.getElementById("fullname").value.trim();
 
     const fullname = document.getElementById("fullname").value.trim();
     const email = document.getElementById("email").value.trim();
@@ -244,3 +248,5 @@ async function withdrawMoney() {
 
     alert("Withdraw request submitted successfully!");
 }
+console.log("script.js loaded");
+console.log(window.supabase);
