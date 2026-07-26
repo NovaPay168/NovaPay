@@ -1,3 +1,4 @@
+alert("script loaded");
 // ================================
 // NovaPay
 // Supabase Config
