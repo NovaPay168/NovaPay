@@ -21,7 +21,7 @@ async function register() {
 
     alert("Register button clicked");
 
-    const fullname = document.getElementById("fullname").value.trim();
+    
 
     const fullname = document.getElementById("fullname").value.trim();
     const email = document.getElementById("email").value.trim();
